@@ -1,11 +1,12 @@
-const Firebase = require('firebase-admin');
+const firebase = require("firebase-admin");
 const serviceAccount = require('../skydrive-9514c-firebase-adminsdk-pzz90-d4d2d67572.json');
 
-// Initialize Firebase Admin SDK with service account credentials
-const firebaseApp = Firebase.initializeApp({
-    credential: Firebase.credential.cert(serviceAccount),
-    storageBucket: 'skydrive-9514c.appspot.com',  // Corrected bucket URL format
-});
+// Initialize Firebase only if there isn't already an instance
+if (!firebase.apps.length) {
+    firebase.initializeApp({
+        credential: firebase.credential.cert(serviceAccount),
+        storageBucket: 'skydrive-9514c.appspot.com',
+    });
+}
 
-// Export the initialized Firebase app for use in other parts of the application
-module.exports = firebaseApp;
+module.exports = firebase;
